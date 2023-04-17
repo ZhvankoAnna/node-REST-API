@@ -1,6 +1,6 @@
 const { HttpError } = require("../helpers");
 
-const {Contact} = require("../models/contact");
+const { Contact } = require("../models/contact");
 
 const { ctrlWrapper } = require("../utils");
 
@@ -34,7 +34,9 @@ const removeContact = async (req, res) => {
 
 const updateContact = async (req, res) => {
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndUpdate(contactId, req.body, {new: true});
+  const result = await Contact.findByIdAndUpdate(contactId, req.body, {
+    new: true,
+  });
   if (!result) {
     throw HttpError(404, `Contact with id ${contactId} not found`);
   }
@@ -43,7 +45,9 @@ const updateContact = async (req, res) => {
 
 const updateFavorite = async (req, res) => {
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndUpdate(contactId, req.body, {new: true});
+  const result = await Contact.findByIdAndUpdate(contactId, req.body, {
+    new: true,
+  });
   if (!result) {
     throw HttpError(404, `Contact with id ${contactId} not found`);
   }
