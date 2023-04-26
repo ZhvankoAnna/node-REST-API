@@ -37,8 +37,11 @@ const login = async (req, res) => {
   if (!user) {
     throw HttpError(401, "Email or password is wrong");
   }
+  console.log(password);
+  console.log(user.password);
+  const comparePassword = await bcrypt.compare(password, user.password);
+  console.log(comparePassword);
 
-  const comparePassword = bcrypt.compare(password, user.password);
   if (!comparePassword) {
     throw HttpError(401, "Email or password is wrong");
   }
@@ -62,7 +65,9 @@ const logout = async (req, res) => {
   const { _id } = req.user;
   await User.findByIdAndUpdate(_id, { token: "" });
 
-  res.status(204);
+  res.status(204).json({
+    message: "Logout success",
+  });
 };
 
 const current = async (req, res) => {
